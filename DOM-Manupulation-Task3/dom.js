@@ -1,9 +1,13 @@
+//Task-3
+
 let headerTitle = document.getElementById("header-title");
 headerTitle.style.borderBottom = "solid 4px #000 ";
 
 let AddItem = document.getElementsByClassName("title");
 AddItem[0].style.color = "Green";
 AddItem[0].style.fontWeight = "bold";
+
+//Task-4
 
 let item = document.getElementsByClassName('list-group-item');
 item[2].style.backgroundColor = "Green";
