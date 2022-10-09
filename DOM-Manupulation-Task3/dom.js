@@ -1,29 +1,9 @@
-//Task-3
+// Task-6
+// querySelector //
 
-let headerTitle = document.getElementById("header-title");
-headerTitle.style.borderBottom = "solid 4px #000 ";
+let seconditem = document.querySelector('.list-group-item:nth-child(2)');
+seconditem.style.backgroundColor = "green";
 
-let AddItem = document.getElementsByClassName("title");
-AddItem[0].style.color = "Green";
-AddItem[0].style.fontWeight = "bold";
+let thirditem = document.querySelector(".list-group-item:nth-child(3)");
+thirditem.style.visibility = "hidden";
 
-//Task-4
-
-// let item = document.getElementsByClassName('list-group-item');
-// item[2].style.backgroundColor = "Green";
-
-// for(let i=0;i<item.length;i++)
-// {
-//     item[i].style.fontWeight = "bold";
-// }
-
-//Task-5
-
-let tagnm = document.getElementsByTagName('li');
-
-tagnm[4].style.backgroundColor = "Yellow";
-
-for(let i=0;i<tagnm.length;i++)
-{
-    tagnm[i].style.fontWeight = "bold";
-}
