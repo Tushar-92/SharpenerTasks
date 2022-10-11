@@ -1,52 +1,51 @@
+var form = document.getElementById('addForm');
+var itemList = document.getElementById('items');
+var filter = document.getElementById('filter');
 
-// Task-7
+// Form submit event
+form.addEventListener('submit', addItem);
+// Delete event
+itemList.addEventListener('click', removeItem);
+// Filter event
+filter.addEventListener('keyup', filterItems);
 
-let itemList = document.querySelector('#items');
+// Add item
+function addItem(e){
+  e.preventDefault();
 
-//parentElement
-console.log(itemList.parentElement);
-itemList.parentElement.style.backgroundColor = '#f4f4f4';
-console.log(itemList.parentElement.parentElement);
+  // Get input value
+  var newItem = document.getElementById('item').value;
 
-//childNodes
-console.log(itemList.childNodes);
+  // Create new li element
+  var li = document.createElement('li');
+  // Add class
+  li.className = 'list-group-item';
+  // Add text node with input value
+  li.appendChild(document.createTextNode(newItem));
 
-//childrem
-console.log(itemList.children);
-console.log(itemList.children[0]);
-itemList.children[1].style.backgroundColor = 'Yellow';
+  // Create del button element
+  var deleteBtn = document.createElement('button');
 
-//firstElementChild
-itemList.firstElementChild.textContent = 'Hello 1';
+  // Add classes to del button
+  deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
 
-//lastElementChild
-itemList.lastElementChild.textContent = 'Hello 2';
+  // Append text node
+  deleteBtn.appendChild(document.createTextNode('X'));
 
-//nextSibling
-console.log(itemList.nextSibling);
+  // Append button to li
+  li.appendChild(deleteBtn);
 
-//nextElementSibling
-console.log(itemList.nextElementSibling);
+  // Append li to list
+  itemList.appendChild(li);
+}
 
-//previousSibling
-console.log(itemList.previousSibling);
+// Remove item
+function removeItem(e){
+  if(e.target.classList.contains('delete')){
+    if(confirm('Are You Sure?')){
+      var li = e.target.parentElement;
+      itemList.removeChild(li);
+    }
+  }
+}
 
-//previousElementSibling
-console.log(itemList.previousElementSibling);
-itemList.previousElementSibling.style.color = "Red";
-
-/////////////Creating Element///////////////////////
-let newDiv = document.createElement('div');
-newDiv.className = 'hello';
-newDiv.id = 'hello1';
-newDiv.setAttribute ('title' , 'Hello Div');
-
-let newDivText = document.createTextNode('Hello World');
-
-newDiv.appendChild(newDivText);
-
-console.log(newDiv);
-
-let container = document.querySelector('header .container');
-let h1 = document.querySelector('header h1');
-container.insertBefore(newDiv, h1); 
