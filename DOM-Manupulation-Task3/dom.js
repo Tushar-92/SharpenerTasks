@@ -1,45 +1,67 @@
-var form = document.getElementById('addForm');
-var itemList = document.getElementById('items');
+let form = document.getElementById('addForm');
+let itemList = document.getElementById('items');
 var filter = document.getElementById('filter');
 
-// Form submit event
+
+//------------------------------------------------------//
+
+//Creating new input element so that we as Item Dessciption in it.
+let descriptionInput = document.createElement('input');
+descriptionInput.type = 'text';
+descriptionInput.className = "form-control mr-2";
+descriptionInput.id = 'item-description';
+
+//Inserting this input element before the Submit button i.e Appending it to <form> but before Submit Button
+form.insertBefore(descriptionInput,form.children[1]);
+
+//------------------------------------------------------//
+
+
+//Form Event
 form.addEventListener('submit', addItem);
+
 // Delete event
 itemList.addEventListener('click', removeItem);
+
 // Filter event
 filter.addEventListener('keyup', filterItems);
 
-// Add item
-function addItem(e){
+function addItem (e) {
   e.preventDefault();
 
-  // Get input value
-  var newItem = document.getElementById('item').value;
+  //Get inpt value
+  let newItem = document.getElementById('item').value ;
+  let itsDescription = document.getElementById('item-description').value; //Ye dusra wala input element i.e Description wale k input k liye hai
+  
+  //Create new list i.e li element
+  let newli = document.createElement('li');
 
-  // Create new li element
-  var li = document.createElement('li');
-  // Add class
-  li.className = 'list-group-item';
-  // Add text node with input value
-  li.appendChild(document.createTextNode(newItem));
+  //Adding class to new li element so that usi class me add ho
+  newli.className = 'list-group-item';
 
-  // Create del button element
-  var deleteBtn = document.createElement('button');
+  //Adding textnode with the input value to the new list i.e new li element me
+  newli.appendChild(document.createTextNode(newItem));
+  newli.appendChild(document.createTextNode(' '+ itsDescription)); //Ye dusra wala input element i.e Description wale k input k liye hai
 
-  // Add classes to del button
-  deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
+  //Now adding X Button to the created list
+  let deleteBtn = document.createElement('button');
 
-  // Append text node
+  //Adding class to Delete Button
+  deleteBtn.className = "btn btn-danger btn-sm float-right delete";
+  
+  //Adding X textnode to the button 
   deleteBtn.appendChild(document.createTextNode('X'));
 
-  // Append button to li
-  li.appendChild(deleteBtn);
+  //Now append this X button to the new list i.e new li element me
+  newli.appendChild(deleteBtn);
 
-  // Append li to list
-  itemList.appendChild(li);
+  //Now appending this new list with delete button to our Items Lists
+  itemList.appendChild(newli);
+
+   
 }
 
-// Remove item
+// Remove item Function
 function removeItem(e){
   if(e.target.classList.contains('delete')){
     if(confirm('Are You Sure?')){
@@ -48,4 +70,25 @@ function removeItem(e){
     }
   }
 }
+
+
+// Filter Items from both the text inputs 
+function filterItems(e){
+  // convert text to lowercase
+  var text = e.target.value.toLowerCase();
+  // Get lis
+  var items = itemList.getElementsByTagName('li');
+  // Convert to an array
+  Array.from(items).forEach(function(item){
+    var itemName = item.firstChild.textContent;
+    var descriptionName = item.childNodes[1].textContent; //since description becomes second child in the list.
+    if(itemName.toLowerCase().indexOf(text) != -1  || descriptionName.toLowerCase().indexOf(text) != -1){
+      item.style.display = 'block';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
+
+
 
