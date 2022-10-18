@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //Creating an Object
+        
+        let userDetails = {
+            Name : 'Tushar Singh',
+            Email : 'ts.aerotab@gmail.com',
+            Mobile : 123456789,
+            Add: 'Mars',
+            AadharNumber : 4646,
+            Position: 'SDE'    
+        }
+
+        //Storing above object as string in localStorage
+        let converted = JSON.stringify(userDetails);
+        localStorage.setItem('User-1 Details', converted); 
+
+        //Retrieveing value from local storage as Object
+        let reconverted = JSON.parse(localStorage.getItem('User-1 Details'));
+
+        //Now my userDetail is back as Object. You can see it in console
+        console.log(reconverted);
+        
+
+     </script>
+
+    
+</body>
+</html>
