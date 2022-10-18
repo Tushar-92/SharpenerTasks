@@ -7,30 +7,40 @@
     <title>Document</title>
 </head>
 <body>
+
+    <form>
+        User Name: <input type="text" id="name">
+        Email Id: <input type="text" id="email">
+        Phone No.: <input type="text" id="phone">
+        <button type ="button"  onclick="addToLocalStorage()">Submit</button>
+    </form>
     <script>
-        //Creating an Object
-        
-        let userDetails = {
-            Name : 'Tushar Singh',
-            Email : 'ts.aerotab@gmail.com',
-            Mobile : 123456789,
-            Add: 'Mars',
-            AadharNumber : 4646,
-            Position: 'SDE'    
+
+        function addToLocalStorage() {
+            
+            // Getting input values from the input elements
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            
+            //Making Object using the input values
+            let userDetails = {
+            UserName: name,
+            EmailId: email,
+            PhoneNo : phone
         }
 
-        //Storing above object as string in localStorage
-        let converted = JSON.stringify(userDetails);
-        localStorage.setItem('User-1 Details', converted); 
+        //Converting object to string and storing it to the localStorage
+        const converted = JSON.stringify(userDetails);
+        localStorage.setItem('User Details' , converted);
 
-        //Retrieveing value from local storage as Object
-        let reconverted = JSON.parse(localStorage.getItem('User-1 Details'));
-
-        //Now my userDetail is back as Object. You can see it in console
+        //Getting back the stored detials as Object
+        const reconverted = JSON.parse(localStorage.getItem('User Details'));
         console.log(reconverted);
         
+    }
 
-     </script>
+    </script>
 
     
 </body>
