@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Appointment Booking App</h1>
+
+    <form>
+        Name: <input type="text" id="name">
+        Email Id: <input type="text" id="email">
+        Mobile No: <input type="text" id="mobile">
+        <button type="button" onclick="addUser()">Submit</button>
+    </form>
+
+    <ul id="users-list"></ul>
+
+    <script>
+
+        function addUser () {
+
+        let name = document.getElementById('name').value;
+        let email = document.getElementById('email').value;
+        let mobile = document.getElementById('mobile').value;
+
+        const userDetail = {
+            Name: name,
+            Email: email,
+            Mobile : mobile, 
+        }
+
+        let convert = JSON.stringify(userDetail);
+
+        //Now using email as unique key for storing user details of different - different users
+        //you can also use mobile number , as this is also unique for everyone
+        //But name can't be unique for everyone
+
+        localStorage.setItem(email , convert);
+
+        //Now displaying added users on the page as list. A/c to task do this using getitem from localStorage
+        let reconverted = JSON.parse(localStorage.getItem(email))
+        let li = document.createElement('li');
+        li.innerHTML= (reconverted.Name +" , "+ reconverted.Email +" , "+ reconverted. Mobile); //since reconverted ab ek Object hi to hai, so using it as Object to get properties from it.
+        let ul = document.getElementById('users-list');
+        ul.appendChild(li);
+        console.log(ul);
+
+
+
+    }
+
+
+    </script>
+</body>
+</html>
