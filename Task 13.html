@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Appointment Booking App</h1>
+
+    <form>
+        Name: <input type="text" id="name" >
+        Email Id: <input type="text" id="email" >
+        Mobile No: <input type="text" id="mobile" >
+        <button type="button" onclick="addUser()">Submit</button>
+    </form>
+
+    <ul id="users-list"></ul>
+
+    <script>
+
+        function addUser () {
+
+        let name = document.getElementById('name').value;
+        let email = document.getElementById('email').value;
+        let mobile = document.getElementById('mobile').value;
+
+        const userDetail = {
+            Name: name,
+            Email: email,
+            Mobile : mobile, 
+        }
+
+     
+
+        //Converting the object into string and then storing it in localStorage (we will use email as key as email is unique for everyone)
+        let convert = JSON.stringify(userDetail);
+        localStorage.setItem(email , convert);
+
+    
+        //Now displaying added users on the page as list. A/c to task do this using getitem from localStorage
+        let reconverted = JSON.parse(localStorage.getItem(email)); //Converting back i.e string to object
+       
+        let ul = document.getElementById('users-list');     
+       
+        let li = document.createElement('li');
+        li.innerHTML= (reconverted.Name +" , "+ reconverted.Email +" , "+ reconverted. Mobile + " "); //since reconverted ab ek Object hi to hai, so using it as Object to get properties from it.
+        
+        //For Editing User
+        let editBtn = document.createElement('button');
+        editBtn.type = 'button';
+        editBtn.innerHTML = 'EDIT';
+        editBtn.addEventListener("click" , editThisKey);
+       
+        //For Deleting User
+        let deleteBtn = document.createElement('button');
+        deleteBtn.type = 'button' ;
+        deleteBtn.innerHTML = 'DELETE' ; 
+        deleteBtn.addEventListener("click", deleteThisKey);
+
+        //Now Appending Everyting at their repective place
+        ul.appendChild(li);
+        li.appendChild(editBtn);
+        li.appendChild(deleteBtn);
+
+        //Creating Functions for Edit Button and Delete Button
+        
+        function editThisKey() {
+        //Showing User Details on respective input field so that user can directly edit there. 
+        document.getElementById('name').value = name;
+        document.getElementById('email').value = email;
+        document.getElementById('mobile').value = mobile;
+
+        //Now Delete the user detail so that when he click on submit button a new details get stored
+        deleteThisKey();
+        }
+        
+
+        function deleteThisKey() {
+           localStorage.removeItem(email);
+           ul.removeChild(li);
+        }
+
+    }
+
+
+    </script>
+</body>
+</html>
