@@ -1,35 +1,23 @@
 
+let Student = {
 
+  name:'Tushar',
 
-let student1 = {
-
-  name: 'Tushar',
-
-  grade: 5,
-
-  displayInfo: function () {
-
-    console.log(this.name + ' studies in grade ' + this.grade);
-
-  }
+  age: 20,
 
 }
 
 
 
-let student2 = {
+function printAge () {
 
-  name: 'Ankit',
-
-  grade: 7,
-
-
+  console.log(this.age);
 
 }
 
 
 
-let result = student1.displayInfo.bind(student2);
+let result = printAge.bind(Student);
 
 
 
