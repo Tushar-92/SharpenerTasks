@@ -1,17 +1,36 @@
 
 
-let obj = {
 
-  num:5,
+let student1 = {
+
+  name: 'Tushar',
+
+  grade: 5,
+
+  displayInfo: function () {
+
+    console.log(this.name + ' studies in grade ' + this.grade);
+
+  }
 
 }
 
-let arr=[1,2,3];
 
-function multiplyWith (x,y,z) {
 
-  return ((this.num)*x*y*z);
+let student2 = {
 
- }
+  name: 'Ankit',
 
-console.log(multiplyWith.apply(obj,arr));
+  grade: 7,
+
+
+
+}
+
+
+
+let result = student1.displayInfo.bind(student2);
+
+
+
+result();
