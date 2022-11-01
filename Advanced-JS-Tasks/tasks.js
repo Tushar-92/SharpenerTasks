@@ -1,24 +1,11 @@
 
-let Student = {
 
-  name:'Tushar',
-
-  age: 20,
-
+let multiply = function (x,y) {
+    console.log(x*y);
 }
 
+let multiplyByTwo = multiply.bind(this, 2);
+multiplyByTwo(5);
 
-
-function printAge () {
-
-  console.log(this.age);
-
-}
-
-
-
-let result = printAge.bind(Student);
-
-
-
-result();
+let multiplyByThree = multiply.bind(this, 3);
+multiplyByThree(5);
