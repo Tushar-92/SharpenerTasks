@@ -1,21 +1,17 @@
 
+
 let obj = {
 
-  name: 'Tushar',
+  num:5,
 
 }
 
+let arr=[1,2,3];
 
+function multiplyWith (x,y,z) {
 
-function greet (msg) {
+  return ((this.num)*x*y*z);
 
-  return msg+' '+this.name;
+ }
 
-}
-
-
-
-console.log(greet.call(obj,'Hii'));
-
-console.log(greet.call(obj,'Welcome'));
-
+console.log(multiplyWith.apply(obj,arr));
