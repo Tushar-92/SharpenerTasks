@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Choose Expense Ammount:<input type="text" id="1">
+    Choose Description:<input type="text" id="2">
+    Choose a Catergory:
+    <select name="typeofexpense" id="3">
+        <option value="Fuel">Fuel</option>
+        <option value="Food">Food</option>
+        <option value="Electricity">Electricity</option>
+        <option value="Entertainment">Entertainment</option>
+        <option value="Stationery Items">Stationery Items</option>
+    </select>
+    <button id="addBtn" onclick="addFunction()">Add Expenses</button>
+    <ul id="addList"></ul>
+
+    <script>
+
+        function addFunction () {
+
+            let firstValue = document.getElementById('1').value;
+            let secondValue = document.getElementById('2').value;
+            let thirdValue = document.getElementById('3').value;
+            
+                       
+            //Now adding the above information(input values) into the localStorage with key as firstValue
+                //First make a single string of the above inputs
+            let str = `${firstValue} - ${secondValue} - ${thirdValue} `;
+                //Now Storing this string str into the local storage
+            localStorage.setItem(firstValue, str );
+
+           
+            //Now adding list of the inputs so that it can be visisble to user on page.
+            let ul = document.getElementById('addList');
+            let newList = document.createElement('li');
+            let textFromStorage = localStorage.getItem(firstValue);
+
+            newList.innerText = textFromStorage;
+            ul.appendChild(newList);
+
+           
+           
+            //Making Delete Expense Button
+            let deleteBtn = document.createElement('button');
+            deleteBtn.type = 'button';
+            deleteBtn.innerText = 'Delete Expenses';
+            newList.appendChild(deleteBtn);
+            deleteBtn.addEventListener('click' , deleteFunction);
+
+            
+            //Making Edit Expense Button
+            let editBtn = document.createElement('button');
+            editBtn.type = 'button';
+            editBtn.innerText = 'Edit Expenses';
+            newList.appendChild(editBtn);
+            editBtn.addEventListener('click' , editFunction);
+            
+            
+            //deleteFunction
+            function deleteFunction () {
+                localStorage.removeItem(firstValue);
+                ul.removeChild(newList);
+            }
+
+            //editFunction
+            function editFunction () {
+                document.getElementById('1').value = firstValue;
+                document.getElementById('2').value = secondValue;
+                document.getElementById('3').value = thirdValue;
+                deleteFunction ();
+
+            }
+
+          
+
+        }
+
+    </script>
+
+
+</body>
+</html>
