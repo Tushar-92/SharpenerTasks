@@ -18,6 +18,8 @@
 
     <ul id="users-list"></ul>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js"></script>
+
     <script>
 
         function addUser () {
@@ -34,18 +36,42 @@
 
      
 
-        //Converting the object into string and then storing it in localStorage (we will use email as key as email is unique for everyone)
-        let convert = JSON.stringify(userDetail);
-        localStorage.setItem(email , convert);
+        //Making lists so that age chal k list me entered data ko display kar paye page pe
+        let ul = document.getElementById('users-list');     
+        let li = document.createElement('li');
+        ul.appendChild(li);
+
+
+
+
+        //----------Storing/Postign the Object into backend (crud-crud k server pe)
+
+        axios
+        .post("https://crudcrud.com/api/c054685dea854c32990943ac333f59b5/appointmentData" , userDetail)
+        .then((response) => { 
+            console.log(response.data);
+            console.log(response.data.Name);
+            console.log(response.data.Email);
+            console.log(response.data.Mobile);
+
+            //Also Displaying the user data on Page with EDIT and DELETE Functionality
+            displayInputFromUser(response);
+
+         })
+        .catch((error) => { 
+            console.log(error);
+            //Also Displaying Error on web Page
+            li.innerHTML = 'Error in Submitting Data';
+         });
+            
 
     
-        //Now displaying added users on the page as list. A/c to task do this using getitem from localStorage
-        let reconverted = JSON.parse(localStorage.getItem(email)); //Converting back i.e string to object
+        //----------Function for Dispalying User Data on Page with EDIT & DELETE Button and functionality
+        
+        function displayInputFromUser (response) {
        
-        let ul = document.getElementById('users-list');     
-       
-        let li = document.createElement('li');
-        li.innerHTML= (reconverted.Name +" , "+ reconverted.Email +" , "+ reconverted. Mobile + " "); //since reconverted ab ek Object hi to hai, so using it as Object to get properties from it.
+        //For Displaying on Page
+        li.innerHTML = `${response.data.Name} , ${response.data.Email} , ${response.data.Mobile}`;
         
         //For Editing User
         let editBtn = document.createElement('button');
@@ -60,31 +86,31 @@
         deleteBtn.addEventListener("click", deleteThisKey);
 
         //Now Appending Everyting at their repective place
-        ul.appendChild(li);
         li.appendChild(editBtn);
         li.appendChild(deleteBtn);
 
-        //Creating Functions for Edit Button and Delete Button
+        //Now Creating Functions for Edit Button and Delete Button
         
         function editThisKey() {
-        //Showing User Details on respective input field so that user can directly edit there. 
-        document.getElementById('name').value = name;
-        document.getElementById('email').value = email;
-        document.getElementById('mobile').value = mobile;
+            //Showing User Details on respective input field so that user can directly edit there. 
+            document.getElementById('name').value = name;
+            document.getElementById('email').value = email;
+            document.getElementById('mobile').value = mobile;
 
-        //Now Delete the user detail so that when he click on submit button a new details get stored
-        deleteThisKey();
+            //Now Delete the user detail so that when he click on submit button a new details get stored
+            deleteThisKey();
         }
         
-
         function deleteThisKey() {
-           localStorage.removeItem(email);
-           ul.removeChild(li);
+            localStorage.removeItem(email);
+            ul.removeChild(li);
         }
 
     }
 
+}
 
-    </script>
+
+</script>
 </body>
 </html>
