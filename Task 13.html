@@ -90,7 +90,7 @@
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //----------Function for Dispalying User Data on Page with EDIT & DELETE Button and functionality
         
-    function displayInputFromUser (response) {
+    function displayInputFromUser (response) { 
        
        //Making lists so that age chal k is list me entered data ko display kar paye page pe.
        let ul = document.getElementById('users-list');     
@@ -120,9 +120,9 @@
        
        function editThisKey() {
            //Showing User Details on respective input field so that user can directly edit there. 
-           document.getElementById('name').value = name;
-           document.getElementById('email').value = email;
-           document.getElementById('mobile').value = mobile;
+           document.getElementById('name').value = response.Name;
+           document.getElementById('email').value = response.Email;
+           document.getElementById('mobile').value = response.Mobile;
 
            //Now Delete the user detail so that when he click on submit button a new details get stored
            deleteThisKey();
