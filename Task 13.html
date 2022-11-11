@@ -28,6 +28,7 @@
             axios
                 .get('https://crudcrud.com/api/94e62049add44f27918bd20ba3ee34be/appointmentData')
                 .then((response) => {
+                    console.log(response);
                     console.log(response.data);
                  
                     //Now displaying the user data from the server on the page.
@@ -97,7 +98,7 @@
        ul.appendChild(li);
 
        //For Displaying on Page
-       li.innerHTML = `${response.Name} , ${response.Email} , ${response.Mobile}`; 
+       li.innerHTML = `${response.Name} , ${response.Email} , ${response.Mobile} ` ; 
        
        //For Editing User
        let editBtn = document.createElement('button');
@@ -128,8 +129,17 @@
        }
        
        function deleteThisKey() {
-           localStorage.removeItem(email);
-           ul.removeChild(li);
+           axios
+           .delete(`https://crudcrud.com/api/94e62049add44f27918bd20ba3ee34be/appointmentData/${response._id}`) //take care     complete url + endpoint + response._id     is in backtick i.e `` otherwise no otherway to add _id into url coming from the response.
+           .then((response) => {
+            ul.removeChild(li);
+           })
+           .catch((error) => {
+            console.log(error);
+           });
+           
+           
+           
        }
 
    }
