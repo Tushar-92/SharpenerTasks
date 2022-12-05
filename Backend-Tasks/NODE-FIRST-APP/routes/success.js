@@ -6,9 +6,9 @@ const rootDir = require('../util/path');
 
 const router = express.Router();
 
-// /=> GET
-router.get('/' , (req , res , next) => {
-    res.sendFile(path.join(rootDir, 'views' , 'shop.html'));
+// /contactus => GET
+router.get('/success', (req, res, next) => {
+  res.send('<h1>Form successfuly filled</h1>');
 });
 
 module.exports = router;
